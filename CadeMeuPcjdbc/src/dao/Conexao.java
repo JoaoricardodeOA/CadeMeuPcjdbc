@@ -37,6 +37,7 @@ public class Conexao {
 	}
 	public Equipamento lerEnviarEquipamentojdbc(Equipamento e) throws SQLException{
 		Connection con = this.getConnection(user, password);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		if(con == null) {
 			return null;
 		}
@@ -47,7 +48,7 @@ public class Conexao {
 				return null;
 			}else {
 				e.setEmpresa(rs.getString("empresa"));
-				e.setIdade(rs.getInt("idade"));
+				e.setIdade(rs.getDate("idade"));
 				e.setManutencao(rs.getBoolean("manutencao"));
 				e.setModelo(rs.getString("modelo"));
 				e.setPatrimonio(rs.getString("patrimonio"));
@@ -60,7 +61,7 @@ public class Conexao {
 			}
 		}else {
 			prst.close();
-			prst = con.prepareStatement("insert into equipamento(vezesQuebrado, serialNumber, patrimonio, idade, modelo, tipo, reponsavel, empresa, manutencao) values ("+e.getVezesQuebrado()+", '"+e.getSerialNumber()+"','"+e.getPatrimonio()+"', "+e.getIdade()+", '"+e.getModelo()+"', '"+e.getTipo()+"', '"+e.getReponsavel()+"', '"+e.getEmpresa()+"', "+e.isManutencao()+")");
+			prst = con.prepareStatement("insert into equipamento(vezesQuebrado, serialNumber, patrimonio, idade, modelo, tipo, reponsavel, empresa, manutencao) values ("+e.getVezesQuebrado()+", '"+e.getSerialNumber()+"','"+e.getPatrimonio()+"', '"+formatter.format(e.getIdade())+"', '"+e.getModelo()+"', '"+e.getTipo()+"', '"+e.getReponsavel()+"', '"+e.getEmpresa()+"', "+e.isManutencao()+")");
 			prst.executeUpdate();
 			prst = con.prepareStatement("select id from equipamento where serialNumber ='"+e.getSerialNumber()+"'");
 			rs = prst.executeQuery();
@@ -85,27 +86,38 @@ public class Conexao {
 	}
 
 	
-	public void lerAtualizarjdbc(Ocorrencia o) throws SQLException{
+	public int lerAtualizarjdbc(Ocorrencia o) throws SQLException{
 		Connection con = this.getConnection(user, password);
 		if(con == null) {	
-			return ;
+			return 0;
 		}
 		PreparedStatement prst = con.prepareStatement("update ocorrencia set nF ='"+o.getnF()+"', oS='"+o.getoS()+"', valor="+o.getValor()+" where id ="+o.getId());
-		prst.executeUpdate();
+		int rows = prst.executeUpdate();
 		prst.close();
+		return rows; 
 	}
+	
 
 	
-	public void lerReceberjdbc(Long id) throws SQLException{
+	public int lerReceberjdbc(Long id) throws SQLException{
 		Connection con = this.getConnection(user, password);
 		if(con == null) {
-			return ;
+			return 0;
 		}
 		PreparedStatement prst = con.prepareStatement("update ocorrencia set situacao=false where id="+id);
-		prst.executeUpdate();
-		prst = con.prepareStatement("update equipamento set manutencao=false where id="+id);
-		prst.executeUpdate();
+		int rows = prst.executeUpdate();
 		prst.close();
+		prst = con.prepareStatement("select equipamento_id from ocorrencia where id="+id);
+		ResultSet rs = prst.executeQuery();
+		if(rows==1) {
+			rs.next();
+			prst = con.prepareStatement("update equipamento set manutencao=false where id="+rs.getLong("equipamento_id"));
+			rows = prst.executeUpdate();
+		}else {
+			return 0;
+		}
+		prst.close();
+		return rows;
 	}
 	
 	public List<Equipamento> queryEnviadojdbc() throws SQLException {
@@ -120,7 +132,7 @@ public class Conexao {
 		while(rs.next()) {
 			e = new Equipamento();
 			e.setEmpresa(rs.getString("empresa"));
-			e.setIdade(rs.getInt("idade"));
+			e.setIdade(rs.getDate("idade"));
 			e.setManutencao(rs.getBoolean("manutencao"));
 			e.setModelo(rs.getString("modelo"));
 			e.setPatrimonio(rs.getString("patrimonio"));
@@ -149,7 +161,7 @@ public class Conexao {
 			e = new Equipamento();
 			e.setId(rs.getLong("id"));
 			e.setEmpresa(rs.getString("empresa"));
-			e.setIdade(rs.getInt("idade"));
+			e.setIdade(rs.getDate("idade"));
 			e.setManutencao(rs.getBoolean("manutencao"));
 			e.setModelo(rs.getString("modelo"));
 			e.setPatrimonio(rs.getString("patrimonio"));
@@ -181,7 +193,7 @@ public class Conexao {
 			e = new Equipamento();
 			e.setId(rs.getLong("id"));
 			e.setEmpresa(rs.getString("empresa"));
-			e.setIdade(rs.getInt("idade"));
+			e.setIdade(rs.getDate("idade"));
 			e.setManutencao(rs.getBoolean("manutencao"));
 			e.setModelo(rs.getString("modelo"));
 			e.setPatrimonio(rs.getString("patrimonio"));
@@ -221,7 +233,7 @@ public class Conexao {
 			e = new Equipamento();
 			e.setId(rs.getLong("id"));
 			e.setEmpresa(rs.getString("empresa"));
-			e.setIdade(rs.getInt("idade"));
+			e.setIdade(rs.getDate("idade"));
 			e.setManutencao(rs.getBoolean("manutencao"));
 			e.setModelo(rs.getString("modelo"));
 			e.setPatrimonio(rs.getString("patrimonio"));

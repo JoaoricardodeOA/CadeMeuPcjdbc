@@ -31,6 +31,8 @@ import java.awt.Label;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 
@@ -39,7 +41,7 @@ public class Login extends JFrame {
 	private JTextField loginField;
 	private JPasswordField senhaField;
 	private LoginController controller;
-	
+	private JButton btnNewButton;
 	public JTextField getLoginField() {
 		return loginField;
 	}
@@ -87,15 +89,36 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
+		panel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
 		panel.setBackground(new Color(244, 164, 96));
 		contentPane.add(panel, BorderLayout.CENTER);
 		
 		loginField = new JTextField();
+		loginField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					senhaField.requestFocus();
+				}
+			}
+		});
 		loginField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("senha");
 		
-		JButton btnNewButton = new JButton("enviar");
+		btnNewButton = new JButton("enviar");
+		btnNewButton.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+				controller.verificarUsuario();
+				}
+			}
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.verificarUsuario();
@@ -109,6 +132,14 @@ public class Login extends JFrame {
 		lblNewLabel_2.setFont(new Font("Verdana", Font.BOLD, 20));
 		
 		senhaField = new JPasswordField();
+		senhaField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+				btnNewButton.requestFocus();
+				}
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)

@@ -1,7 +1,6 @@
 package model;
 
-
-
+import java.util.Date;
 
 public class Equipamento implements Comparable<Equipamento>{
 	
@@ -10,14 +9,14 @@ public class Equipamento implements Comparable<Equipamento>{
 	private int vezesQuebrado;
 	private String serialNumber;
 	private String patrimonio;
-	private int idade;
+	private Date idade;
 	private String modelo;
 	private String tipo;
 	private String reponsavel;
 	private boolean manutencao;
 	private String empresa;
 	
-	public Equipamento( String serialNumber, String patrimonio, int idade, String modelo, String tipo, String reponsavel, String empresa) {
+	public Equipamento( String serialNumber, String patrimonio, Date idade, String modelo, String tipo, String reponsavel, String empresa) {
 		this.serialNumber = serialNumber;
 		this.patrimonio = patrimonio;
 		this.idade = idade;
@@ -28,7 +27,7 @@ public class Equipamento implements Comparable<Equipamento>{
 		this.manutencao = true;
 		vezesQuebrado = 1;
 	}
-	public Equipamento(long id,int vezesQuebrado, String serialNumber, String patrimonio, int idade, String modelo, String tipo, String reponsavel, String empresa, boolean manutencao) {
+	public Equipamento(long id,int vezesQuebrado, String serialNumber, String patrimonio, Date idade, String modelo, String tipo, String reponsavel, String empresa, boolean manutencao) {
 		this.id = id;
 		this.vezesQuebrado = vezesQuebrado;
 		this.serialNumber = serialNumber;
@@ -73,10 +72,10 @@ public class Equipamento implements Comparable<Equipamento>{
 	public void setPatrimonio(String patrimonio) {
 		this.patrimonio = patrimonio;
 	}
-	public int getIdade() {
+	public Date getIdade() {
 		return idade;
 	}
-	public void setIdade(int idade) {
+	public void setIdade(Date idade) {
 		this.idade = idade;
 	}
 	public String getModelo() {

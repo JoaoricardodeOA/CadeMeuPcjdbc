@@ -34,13 +34,14 @@ public class ConsultaController {
 	}
 	private void atualizaTabelaEquipamento(List<Equipamento> e) {
 		DefaultTableModel tableModel = (DefaultTableModel) view.getTable().getModel();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		tableModel.setNumRows(0);
 		for (Equipamento equipamento : e) {
 			tableModel.addRow(new Object[] {
 					null,
 					equipamento.getSerialNumber(),
 					equipamento.getPatrimonio(),
-					equipamento.getIdade(),
+					dateFormat.format(equipamento.getIdade()),
 					equipamento.getModelo(),
 					equipamento.getTipo(),
 					equipamento.getReponsavel(),
@@ -94,7 +95,7 @@ public class ConsultaController {
 					ocorrencia.getId(),
 					ocorrencia.getEquipamento().getSerialNumber(),
 					ocorrencia.getEquipamento().getPatrimonio(),
-					ocorrencia.getEquipamento().getIdade(),
+					dateFormat.format(ocorrencia.getEquipamento().getIdade()),
 					ocorrencia.getEquipamento().getModelo(),
 					ocorrencia.getEquipamento().getTipo(),
 					ocorrencia.getEquipamento().getReponsavel(),

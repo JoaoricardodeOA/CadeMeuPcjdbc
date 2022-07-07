@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,13 +18,17 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class EnviarView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textSerial;
 	private JTextField textPatrimonio;
@@ -39,6 +43,7 @@ public class EnviarView extends JFrame {
 	private JTextField textProblema;
 	private JTextField textTipo;
 	private JCheckBox chckbxNewCheckBox;
+	private JButton btnNewButton;
 	public JCheckBox getChckbxNewCheckBox() {
 		return chckbxNewCheckBox;
 	}
@@ -93,6 +98,14 @@ public class EnviarView extends JFrame {
 		setContentPane(contentPane);
 		
 		textSerial = new JTextField();
+		textSerial.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textPatrimonio.requestFocus();
+				}
+			}
+		});
 		textSerial.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("serial number");
@@ -100,17 +113,42 @@ public class EnviarView extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("patrim\u00F4nio");
 		
 		textPatrimonio = new JTextField();
+		textPatrimonio.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textIdade.requestFocus();
+				}
+			}
+		});
 		textPatrimonio.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("idade");
 		lblNewLabel_2.setToolTipText("");
 		
 		textIdade = new JTextField();
+		textIdade.setText("01/01/2000");
+		textIdade.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textModelo.requestFocus();
+				}
+			}
+		});
 		textIdade.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("modelo");
 		
 		textModelo = new JTextField();
+		textModelo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textField.requestFocus();
+				}
+			}
+		});
 		textModelo.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("empresa");
@@ -118,36 +156,94 @@ public class EnviarView extends JFrame {
 		JLabel lblNewLabel_5 = new JLabel("prestador");
 		
 		textPrestador = new JTextField();
+		textPrestador.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textData.requestFocus();
+				}
+			}
+		});
 		textPrestador.setColumns(10);
 		
-		JLabel lblNewLabel_6 = new JLabel("dia/mes/ano");
+		JLabel lblNewLabel_6 = new JLabel("data ocorrencia");
 		
 		textData = new JTextField();
+		textData.setText("01/01/2020");
+		textData.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textValor.requestFocus();
+				}
+			}
+		});
 		textData.setColumns(10);
 		
 		JLabel lblNewLabel_7 = new JLabel("valor");
 		
 		textValor = new JTextField();
+		textValor.setText("0,00");
+		textValor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textNF.requestFocus();
+				}
+			}
+		});
 		textValor.setColumns(10);
 		
 		JLabel lblNewLabel_8 = new JLabel("NF");
 		
 		textNF = new JTextField();
+		textNF.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textResponsavel.requestFocus();
+				}
+			}
+		});
 		textNF.setColumns(10);
 		
 		JLabel lblNewLabel_9 = new JLabel("respons\u00E1vel");
 		
 		textResponsavel = new JTextField();
+		textResponsavel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textOS.requestFocus();
+				}
+			}
+		});
 		textResponsavel.setColumns(10);
 		
 		JLabel lblNewLabel_10 = new JLabel("OS");
 		
 		textOS = new JTextField();
+		textOS.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textProblema.requestFocus();
+				}
+			}
+		});
 		textOS.setColumns(10);
 		
 		JLabel lblNewLabel_11 = new JLabel("problema");
 		
 		textProblema = new JTextField();
+		textProblema.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					btnNewButton.requestFocus();
+				}
+			}
+		});
 		textProblema.setColumns(10);
 		
 		chckbxNewCheckBox = new JCheckBox("com fonte?");
@@ -155,9 +251,25 @@ public class EnviarView extends JFrame {
 		JLabel lblNewLabel_12 = new JLabel("tipo");
 		
 		textTipo = new JTextField();
+		textTipo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textPrestador.requestFocus();
+				}
+			}
+		});
 		textTipo.setColumns(10);
 		
-		JButton btnNewButton = new JButton("enviar");
+		btnNewButton = new JButton("enviar");
+		btnNewButton.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					controller.lerDados();
+				}
+			}			
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.lerDados();
@@ -165,6 +277,14 @@ public class EnviarView extends JFrame {
 		});
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textTipo.requestFocus();
+				}
+			}
+		});
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_13 = new JLabel("R$");

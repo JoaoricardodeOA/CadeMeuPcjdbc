@@ -20,13 +20,14 @@ public class EnviarHelper {
 	}
 	public Equipamento lerEquipamento() {
 		 try {
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			String serial = view.getTextSerial().getText().toLowerCase();
 		 	String patrimonio = view.getTextPatrimonio().getText().toLowerCase();
 		 	String empresa = view.getTextField().getText().toLowerCase();
 		 	String modelo = view.getTextModelo().getText().toLowerCase();
 		 	String tipo = view.getTextTipo().getText().toLowerCase();
 		 	String responsavel = view.getTextResponsavel().getText().toLowerCase();
-			int idade = Integer.parseInt(view.getTextIdade().getText());
+			Date idade = formatter.parse(view.getTextData().getText());
 			 if(serial == null||patrimonio== null||modelo==null||tipo==null||responsavel==null||empresa==null) {
 				 view.exibeMensagem("campos = serial, patrimonio, idade, modelo, tipo, responsavel e empresa precisam ser preenchidos");
 				 return null;
@@ -34,9 +35,10 @@ public class EnviarHelper {
 			 Equipamento equipamento = new Equipamento(serial,patrimonio,idade,modelo,tipo,responsavel,empresa);
 			 view.exibeMensagem("cadastro equipamento com sucesso");
 			 return equipamento;
-			 }catch(NumberFormatException a){
+			 } catch (ParseException e) {
+				// TODO Auto-generated catch block
 				 view.exibeMensagem("Idade em formato incorreto");
-			 }
+			}
 		 return null;
 
 			

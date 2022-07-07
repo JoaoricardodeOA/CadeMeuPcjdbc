@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,12 +18,19 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ReceberView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private ReceberController controller;
+	private JButton btnNewButton;
 
 	public JTextField getTextField() {
 		return textField;
@@ -69,9 +75,25 @@ public class ReceberView extends JFrame {
 		JLabel lblNewLabel = new JLabel("id da ocorrencia");
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+				btnNewButton.requestFocus();
+				}
+			}
+		});
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("enviar");
+		btnNewButton = new JButton("enviar");
+		btnNewButton.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					controller.lerDados();
+				}
+			}
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.lerDados();

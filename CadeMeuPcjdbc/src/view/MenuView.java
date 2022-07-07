@@ -18,11 +18,19 @@ import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Panel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MenuView extends JFrame {
 
 	private JPanel contentPane;
 	private MenuController controller;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
+	private JButton btnNewButton_3;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +60,19 @@ public class MenuView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnNewButton = new JButton("enviar pc");
+		btnNewButton = new JButton("enviar pc");
+		btnNewButton.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					controller.abrirEnviar();
+				}else if(e.getKeyCode()==e.VK_DOWN) {
+				    btnNewButton_2.requestFocus();
+				}else if(e.getKeyCode()==e.VK_RIGHT) {
+				    btnNewButton_1.requestFocus();
+				}
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -60,21 +80,57 @@ public class MenuView extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("atualizar");
+		btnNewButton_1 = new JButton("atualizar");
+		btnNewButton_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					controller.abrirAtualizar();
+				}else if(e.getKeyCode()==e.VK_LEFT) {
+				    btnNewButton.requestFocus();
+				}else if(e.getKeyCode()==e.VK_DOWN) {
+				    btnNewButton_3.requestFocus();
+				}
+			}
+		});
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.abrirAtualizar();
 			}
 		});
 		
-		JButton btnNewButton_2 = new JButton("receber");
+		btnNewButton_2 = new JButton("receber");
+		btnNewButton_2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					controller.abrirReceber();
+				}else if(e.getKeyCode()==e.VK_UP) {
+				    btnNewButton.requestFocus();
+				}else if(e.getKeyCode()==e.VK_RIGHT) {
+				    btnNewButton_3.requestFocus();
+				}
+			}
+		});
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.abrirReceber();
 			}
 		});
 		
-		JButton btnNewButton_3 = new JButton("consultar");
+		btnNewButton_3 = new JButton("consultar");
+		btnNewButton_3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					controller.abrirConsulta();
+				}else if(e.getKeyCode()==e.VK_LEFT) {
+				    btnNewButton_2.requestFocus();
+				}else if(e.getKeyCode()==e.VK_UP) {
+				    btnNewButton_1.requestFocus();
+				}
+			}
+		});
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.abrirConsulta();

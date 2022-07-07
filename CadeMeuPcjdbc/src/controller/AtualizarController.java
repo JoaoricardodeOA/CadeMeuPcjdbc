@@ -21,8 +21,12 @@ public class AtualizarController {
 		}
 		Conexao conexao = new Conexao();
 		try {
-			conexao.lerAtualizarjdbc(o);
-			view.exibeMensagem("Dados enviados");
+			int rows = conexao.lerAtualizarjdbc(o);
+			if(rows == 1) {
+				view.exibeMensagem("Dados enviados");
+			}else {
+				view.exibeMensagem("Id não encontrado");
+			}
 		} catch (SQLException e) {
 			view.exibeMensagem("erro sql");
 		}

@@ -11,14 +11,19 @@ public class ReceberController {
 		this.view = view;
 	}
 	public void lerDados() {
-		Long id = Long.parseLong(view.getTextField().getText());
-		Conexao conexao= new Conexao();
-		
 		try {
-			conexao.lerReceberjdbc(id);
-			view.exibeMensagem("Dados enviados");
+			Long id = Long.parseLong(view.getTextField().getText());	
+			Conexao conexao= new Conexao();
+			int rows = conexao.lerReceberjdbc(id);
+			if(rows == 1) {
+				view.exibeMensagem("Dados enviados");
+			}else {
+				view.exibeMensagem("Id não encontrado");
+			}
 		} catch (SQLException e) {
 			view.exibeMensagem("erro sql");
+		} catch (NumberFormatException e) {
+			view.exibeMensagem("id não preenchido");
 		}
-	}
+ 	}
 }

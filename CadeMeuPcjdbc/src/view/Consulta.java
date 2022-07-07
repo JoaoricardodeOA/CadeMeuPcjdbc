@@ -30,6 +30,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Consulta extends JFrame {
 
@@ -134,13 +136,24 @@ public class Consulta extends JFrame {
 		setContentPane(contentPane);
 		
 		JScrollPane scrollPane = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setAutoscrolls(true);
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textField_1.requestFocus();
+				}
+			}
+		});
+		textField.setText("01/01/2020");
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("data inicial");
 		
 		textField_1 = new JTextField();
+		textField_1.setText("31/12/3000");
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("data final");

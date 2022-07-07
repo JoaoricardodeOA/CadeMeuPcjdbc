@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AtualizarView extends JFrame {
 
@@ -94,14 +96,39 @@ public class AtualizarView extends JFrame {
 		setContentPane(contentPane);
 		
 		textId = new JTextField();
+		textId.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textNf.requestFocus();
+				}
+			}
+		});
 		textId.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("id ocorr\u00EAncia");
 		
 		textValor = new JTextField();
+		textValor.setText("0,00");
+		textValor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					btnNewButton.requestFocus();
+				}
+			}
+		});
 		textValor.setColumns(10);
 		
 		textNf = new JTextField();
+		textNf.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textOs.requestFocus();
+			}
+			}
+		});
 		textNf.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("valor");
@@ -109,20 +136,38 @@ public class AtualizarView extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("NF");
 		
 		textOs = new JTextField();
+		textOs.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textValor.requestFocus();
+			}
+			}
+		});
 		textOs.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("OS");
 		
 		btnNewButton = new JButton("enviar");
+		btnNewButton.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					controller.lerDados();
+				}
+			}
+		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.lerDados();
 			}
 		});
 		
+		JLabel lblNewLabel_4 = new JLabel("R$");
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(59)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
@@ -130,7 +175,9 @@ public class AtualizarView extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(textOs, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_3))
-							.addPreferredGap(ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblNewLabel_4)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_1)
 								.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
@@ -142,9 +189,9 @@ public class AtualizarView extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_2)
 								.addComponent(textNf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(128, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(305, Short.MAX_VALUE)
+					.addContainerGap(117, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(331, Short.MAX_VALUE)
 					.addComponent(btnNewButton)
 					.addContainerGap())
 		);
@@ -166,12 +213,12 @@ public class AtualizarView extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textOs, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_4))
 					.addGap(18)
 					.addComponent(btnNewButton)
 					.addContainerGap(51, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

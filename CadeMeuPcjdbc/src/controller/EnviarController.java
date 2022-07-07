@@ -25,7 +25,7 @@ public class EnviarController {
 		try {
 		e = conexao.lerEnviarEquipamentojdbc(e);
 		if(e == null){
-			view.exibeMensagem("equipamento já em manutenção ou dados incorretos");
+			view.exibeMensagem("equipamento ja em manutencao ou dados incorretos");
 			return ;
 		}
 		Ocorrencia o = helper.lerOcorrencia(e);

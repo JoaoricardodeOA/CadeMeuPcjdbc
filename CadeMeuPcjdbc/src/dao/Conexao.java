@@ -25,11 +25,11 @@ public class Conexao {
 	}
 	
 	public Connection getConnection(String user, String password) {
-		String urlConnection = "jdbc:mysql://localhost/gerenciamento";
+		String urlConnection = "jdbc:mysql://172.16.1.68/gerenciamento";
 		this.user = user;
 		this.password = password;
 		try {	
-			Connection con = DriverManager.getConnection(urlConnection, "root", "12345");
+			Connection con = DriverManager.getConnection(urlConnection, "root", "adrede");
 			return con;
 		}catch(SQLException e) {
 			return null;

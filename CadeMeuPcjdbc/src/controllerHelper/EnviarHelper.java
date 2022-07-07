@@ -33,7 +33,6 @@ public class EnviarHelper {
 				 return null;
 			 }
 			 Equipamento equipamento = new Equipamento(serial,patrimonio,idade,modelo,tipo,responsavel,empresa);
-			 view.exibeMensagem("cadastro equipamento com sucesso");
 			 return equipamento;
 			 } catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -61,7 +60,6 @@ public class EnviarHelper {
 				 view.exibeMensagem("campos = prestador, problema, data e valor precisam ser preenchidos");
 				 return null;
 			 }
-			view.exibeMensagem("cadastro ocorrência com sucesso");
 			return ocorrencia;
 		}catch(ParseException e) {
 			view.exibeMensagem("Data em formato incorreto");

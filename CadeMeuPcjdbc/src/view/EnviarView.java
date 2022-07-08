@@ -22,6 +22,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
 
 public class EnviarView extends JFrame {
 
@@ -33,17 +34,15 @@ public class EnviarView extends JFrame {
 	private JTextField textSerial;
 	private JTextField textPatrimonio;
 	private JTextField textIdade;
-	private JTextField textModelo;
-	private JTextField textPrestador;
 	private JTextField textData;
 	private JTextField textValor;
 	private JTextField textNF;
 	private JTextField textResponsavel;
 	private JTextField textOS;
 	private JTextField textProblema;
-	private JTextField textTipo;
 	private JCheckBox chckbxNewCheckBox;
 	private JButton btnNewButton;
+	private JComboBox comboBox;
 	public JCheckBox getChckbxNewCheckBox() {
 		return chckbxNewCheckBox;
 	}
@@ -53,17 +52,12 @@ public class EnviarView extends JFrame {
 	}
 
 	
-	public JTextField getTextField() {
-		return textField;
-	}
-
-	public void setTextField(JTextField textField) {
-		this.textField = textField;
-	}
 
 
 	private EnviarController controller;
-	private JTextField textField;
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_2;
+	private JComboBox comboBox_3;
 	
 	public void exibeMensagem(String msg) {
 		JOptionPane.showMessageDialog(null,msg);
@@ -132,7 +126,7 @@ public class EnviarView extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==e.VK_ENTER) {
-					textModelo.requestFocus();
+					comboBox.requestFocus();
 				}
 			}
 		});
@@ -140,31 +134,9 @@ public class EnviarView extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("modelo");
 		
-		textModelo = new JTextField();
-		textModelo.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==e.VK_ENTER) {
-					textField.requestFocus();
-				}
-			}
-		});
-		textModelo.setColumns(10);
-		
 		JLabel lblNewLabel_4 = new JLabel("empresa");
 		
 		JLabel lblNewLabel_5 = new JLabel("prestador");
-		
-		textPrestador = new JTextField();
-		textPrestador.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==e.VK_ENTER) {
-					textData.requestFocus();
-				}
-			}
-		});
-		textPrestador.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel("data ocorrencia");
 		
@@ -250,23 +222,16 @@ public class EnviarView extends JFrame {
 		
 		JLabel lblNewLabel_12 = new JLabel("tipo");
 		
-		textTipo = new JTextField();
-		textTipo.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode()==e.VK_ENTER) {
-					textPrestador.requestFocus();
-				}
-			}
-		});
-		textTipo.setColumns(10);
-		
 		btnNewButton = new JButton("enviar");
 		btnNewButton.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==e.VK_ENTER) {
 					controller.lerDados();
+					controller.comboBoxTipo();
+					controller.comboBoxEmpresa();
+					controller.comboBoxPrestador();
+					controller.comboBoxModelo();
 				}
 			}			
 		});
@@ -276,18 +241,55 @@ public class EnviarView extends JFrame {
 			}
 		});
 		
-		textField = new JTextField();
-		textField.addKeyListener(new KeyAdapter() {
+		JLabel lblNewLabel_13 = new JLabel("R$");
+		
+		comboBox = new JComboBox();
+		comboBox.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()==e.VK_ENTER) {
-					textTipo.requestFocus();
+					comboBox_1.requestFocus();
 				}
 			}
 		});
-		textField.setColumns(10);
+		comboBox.setEditable(true);
+		controller.comboBoxModelo();
 		
-		JLabel lblNewLabel_13 = new JLabel("R$");
+		comboBox_1 = new JComboBox();
+		comboBox_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					comboBox_2.requestFocus();
+				}
+			}
+		});
+		comboBox_1.setEditable(true);
+		controller.comboBoxEmpresa();
+		
+		comboBox_2 = new JComboBox();
+		comboBox_2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					comboBox_3.requestFocus();
+				}
+			}
+		});
+		comboBox_2.setEditable(true);
+		controller.comboBoxTipo();
+		
+		comboBox_3 = new JComboBox();
+		comboBox_3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==e.VK_ENTER) {
+					textData.requestFocus();
+				}
+			}
+		});
+		comboBox_3.setEditable(true);
+		controller.comboBoxPrestador();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -299,23 +301,23 @@ public class EnviarView extends JFrame {
 								.addComponent(lblNewLabel_9)
 								.addComponent(textResponsavel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(lblNewLabel)
-										.addComponent(textSerial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textPrestador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblNewLabel_5)
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addGap(59)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(textTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel_6)
-										.addComponent(textPatrimonio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(comboBox_1, 0, 0, Short.MAX_VALUE)
+										.addComponent(textSerial)
+										.addComponent(comboBox_3, 0, 0, Short.MAX_VALUE))
+									.addGap(98)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(textPatrimonio)
 										.addComponent(lblNewLabel_1)
-										.addComponent(textData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textData)
 										.addComponent(lblNewLabel_10)
-										.addComponent(textOS, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel_12))))
-							.addGap(18)
+										.addComponent(textOS)
+										.addComponent(lblNewLabel_12)
+										.addComponent(comboBox_2, Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
+										.addComponent(lblNewLabel_6))))
+							.addGap(57)
 							.addComponent(lblNewLabel_13)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -328,21 +330,21 @@ public class EnviarView extends JFrame {
 										.addContainerGap())
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+											.addComponent(textProblema, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
 											.addGroup(gl_contentPane.createSequentialGroup()
 												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 													.addComponent(lblNewLabel_2)
 													.addComponent(textIdade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 													.addComponent(lblNewLabel_7)
 													.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addPreferredGap(ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-													.addComponent(textNF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+													.addComponent(textNF)
 													.addComponent(lblNewLabel_3)
-													.addComponent(textModelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-													.addComponent(lblNewLabel_8)))
-											.addComponent(btnNewButton)
-											.addComponent(textProblema, GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
-										.addGap(31)))))
+													.addComponent(lblNewLabel_8)
+													.addComponent(comboBox, 0, 0, Short.MAX_VALUE)))
+											.addComponent(btnNewButton))
+										.addGap(62)))))
 						.addComponent(lblNewLabel_4)))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -359,17 +361,18 @@ public class EnviarView extends JFrame {
 						.addComponent(textSerial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textPatrimonio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textIdade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textModelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(52)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_4)
 						.addComponent(lblNewLabel_12))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(chckbxNewCheckBox)
-						.addComponent(textTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(42)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(39)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_5)
 						.addComponent(lblNewLabel_7)
@@ -377,11 +380,11 @@ public class EnviarView extends JFrame {
 						.addComponent(lblNewLabel_6))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textPrestador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textValor, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_13)
-						.addComponent(textNF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textNF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(53)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_9)
@@ -392,11 +395,19 @@ public class EnviarView extends JFrame {
 						.addComponent(textResponsavel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textOS, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textProblema, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(28)
+					.addGap(32)
 					.addComponent(btnNewButton)
-					.addContainerGap(39, Short.MAX_VALUE))
+					.addContainerGap(37, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	public JComboBox getComboBox() {
+		return comboBox;
+	}
+
+	public void setComboBox(JComboBox comboBox) {
+		this.comboBox = comboBox;
 	}
 
 	public JTextField getTextResponsavel() {
@@ -431,20 +442,31 @@ public class EnviarView extends JFrame {
 		this.textIdade = textIdade;
 	}
 
-	public JTextField getTextModelo() {
-		return textModelo;
+
+	
+
+	public JComboBox getComboBox_1() {
+		return comboBox_1;
 	}
 
-	public void setTextModelo(JTextField textModelo) {
-		this.textModelo = textModelo;
+	public void setComboBox_1(JComboBox comboBox_1) {
+		this.comboBox_1 = comboBox_1;
 	}
 
-	public JTextField getTextPrestador() {
-		return textPrestador;
+	public JComboBox getComboBox_2() {
+		return comboBox_2;
 	}
 
-	public void setTextPrestador(JTextField textPrestador) {
-		this.textPrestador = textPrestador;
+	public void setComboBox_2(JComboBox comboBox_2) {
+		this.comboBox_2 = comboBox_2;
+	}
+
+	public JComboBox getComboBox_3() {
+		return comboBox_3;
+	}
+
+	public void setComboBox_3(JComboBox comboBox_3) {
+		this.comboBox_3 = comboBox_3;
 	}
 
 	public JTextField getTextData() {
@@ -487,11 +509,5 @@ public class EnviarView extends JFrame {
 		this.textProblema = textProblema;
 	}
 
-	public JTextField getTextTipo() {
-		return textTipo;
-	}
-
-	public void setTextTipo(JTextField textTipo) {
-		this.textTipo = textTipo;
-	}
+	
 }

@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 import exceptions.CamposInvalidosException;
@@ -23,9 +25,9 @@ public class EnviarHelper {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			String serial = view.getTextSerial().getText().toLowerCase();
 		 	String patrimonio = view.getTextPatrimonio().getText().toLowerCase();
-		 	String empresa = view.getTextField().getText().toLowerCase();
-		 	String modelo = view.getTextModelo().getText().toLowerCase();
-		 	String tipo = view.getTextTipo().getText().toLowerCase();
+		 	String empresa =view.getComboBox_1().getSelectedItem().toString().toLowerCase();
+		 	String modelo = view.getComboBox().getSelectedItem().toString().toLowerCase();
+		 	String tipo = view.getComboBox_2().getSelectedItem().toString().toLowerCase();
 		 	String responsavel = view.getTextResponsavel().getText().toLowerCase();
 			Date idade = formatter.parse(view.getTextData().getText());
 			 if(serial == null||patrimonio== null||modelo==null||tipo==null||responsavel==null||empresa==null) {
@@ -44,7 +46,7 @@ public class EnviarHelper {
 	 }
 	public Ocorrencia lerOcorrencia(Equipamento equipamento) {
 		 try {
-			String prestador = view.getTextPrestador().getText().toLowerCase();
+			String prestador = view.getComboBox_3().getSelectedItem().toString().toLowerCase();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			String problema = view.getTextProblema().getText().toLowerCase();
 			boolean fonte = view.getChckbxNewCheckBox().isSelected();
@@ -68,5 +70,44 @@ public class EnviarHelper {
 		}
 		return null;
 	}
-	
+	public void preencherComboBoxModelo(List<String> list) {
+		DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getComboBox().getModel();
+		comboBoxModel.removeAllElements();
+		if(list != null) {
+			for (String string : list) {
+				comboBoxModel.addElement(string);
+			}
+		}
+		
+	}
+	public void preencherComboBoxEmpresa(List<String> list) {
+		DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getComboBox_1().getModel();
+		comboBoxModel.removeAllElements();
+		if(list != null) {
+			for (String string : list) {
+				comboBoxModel.addElement(string);
+			}
+		}
+		
+	}
+	public void preencherComboBoxTipo(List<String> list) {
+		DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getComboBox_2().getModel();
+		comboBoxModel.removeAllElements();
+		if(list != null) {
+			for (String string : list) {
+				comboBoxModel.addElement(string);
+			}
+		}
+		
+	}
+	public void preencherComboBoxPrestador(List<String> list) {
+		DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getComboBox_3().getModel();
+		comboBoxModel.removeAllElements();
+		if(list != null) {
+			for (String string : list) {
+				comboBoxModel.addElement(string);
+			}
+		}
+		
+	}
 }

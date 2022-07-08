@@ -3,6 +3,7 @@ package controller;
 
 
 import java.sql.SQLException;
+import java.util.List;
 
 import controllerHelper.EnviarHelper;
 import dao.Conexao;
@@ -35,5 +36,45 @@ public class EnviarController {
 			view.exibeMensagem("Erro sql");
 		}
 	 }
-	
+	 public void comboBoxModelo() {
+		 conexao = new Conexao();
+		 try {
+			 List<String> list = conexao.queryModeloComboBox();
+			 
+			 helper.preencherComboBoxModelo(list);
+		 }catch(SQLException o) {
+			view.exibeMensagem("Erro sql");
+		}
+	 }
+	 public void comboBoxEmpresa() {
+		 conexao = new Conexao();
+		 try {
+			 List<String> list = conexao.queryEmpresaComboBox();
+			 
+			 helper.preencherComboBoxEmpresa(list);
+		 }catch(SQLException o) {
+			view.exibeMensagem("Erro sql");
+		}
+	 }
+	 public void comboBoxTipo() {
+		 conexao = new Conexao();
+		 try {
+			 List<String> list = conexao.queryTipoComboBox();
+			 
+			 helper.preencherComboBoxTipo(list);
+		 }catch(SQLException o) {
+			view.exibeMensagem("Erro sql");
+		}
+	 }
+	 public void comboBoxPrestador() {
+		 conexao = new Conexao();
+		 try {
+			 List<String> list = conexao.queryPrestadorComboBox();
+			 
+			 helper.preencherComboBoxPrestador(list);
+		 }catch(SQLException o) {
+			view.exibeMensagem("Erro sql");
+		}
+	 }
+
 }

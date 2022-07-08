@@ -25,12 +25,11 @@ public class Conexao {
 	}
 	
 	public Connection getConnection(String user, String password) {
-		String urlConnection = "jdbc:mysql://172.16.1.68/gerenciamento";
+		String urlConnection = "jdbc:mysql://localhost/gerenciamento";
 		this.user = user;
 		this.password = password;
 		try {	
-			Connection con = DriverManager.getConnection(urlConnection, "root", "adrede");
-			return con;
+			return DriverManager.getConnection(urlConnection, "root", "12345");
 		}catch(SQLException e) {
 			return null;
 		}
@@ -256,6 +255,65 @@ public class Conexao {
 		}
 		rs.close();
 		prst.close();
+		return list;
+	}
+	public List<String> queryModeloComboBox() throws SQLException{
+		Connection conn = getConnection(user, password);
+		PreparedStatement prst = conn.prepareStatement("select modelo from equipamento");
+		ResultSet rs = prst.executeQuery();
+		String modelo;
+		List<String>  list = new ArrayList<>(); 
+		while(rs.next()) {
+			modelo = rs.getString("modelo");
+			if(!list.contains(modelo)) {
+				list.add(modelo);
+			}
+		}
+		return list;
+	}
+
+	public List<String> queryEmpresaComboBox() throws SQLException {
+		Connection conn = getConnection(user, password);
+		PreparedStatement prst = conn.prepareStatement("select empresa from equipamento");
+		ResultSet rs = prst.executeQuery();
+		String empresa;
+		List<String>  list = new ArrayList<>(); 
+		while(rs.next()) {
+			empresa = rs.getString("empresa");
+			if(!list.contains(empresa)) {
+				list.add(empresa);
+			}
+		}
+		return list;
+	}
+
+	public List<String> queryTipoComboBox() throws SQLException {
+		Connection conn = getConnection(user, password);
+		PreparedStatement prst = conn.prepareStatement("select tipo from equipamento");
+		ResultSet rs = prst.executeQuery();
+		String tipo;
+		List<String>  list = new ArrayList<>(); 
+		while(rs.next()) {
+			tipo = rs.getString("tipo");
+			if(!list.contains(tipo)) {
+				list.add(tipo);
+			}
+		}
+		return list;
+	}
+
+	public List<String> queryPrestadorComboBox() throws SQLException {
+		Connection conn = getConnection(user, password);
+		PreparedStatement prst = conn.prepareStatement("select prestador from ocorrencia");
+		ResultSet rs = prst.executeQuery();
+		String prestador;
+		List<String>  list = new ArrayList<>(); 
+		while(rs.next()) {
+			prestador = rs.getString("prestador");
+			if(!list.contains(prestador)) {
+				list.add(prestador);
+			}
+		}
 		return list;
 	}
 
